@@ -16,7 +16,8 @@ namespace MyExercise01.Controllers
         public ActionResult Index()
         {
             var 客戶聯絡人 = db.客戶聯絡人.Include(客 => 客.客戶資料)
-                            .Where(w => w.是否已刪除 == false);
+                            .Where(w => w.是否已刪除 == false)
+                            .OrderBy(o=>o.客戶Id).AsQueryable();
             return View(客戶聯絡人.ToList());
         }
 
@@ -26,7 +27,8 @@ namespace MyExercise01.Controllers
             var 客戶聯絡人 = db.客戶聯絡人.Include(客 => 客.客戶資料)
                             .Where(w => w.是否已刪除 == false &&
                                     w.姓名.Contains(searchName) &&
-                                    w.客戶資料.客戶名稱.Contains(searchCusName));
+                                    w.客戶資料.客戶名稱.Contains(searchCusName))
+                            .OrderBy(o => o.客戶Id).AsQueryable();
             return View(客戶聯絡人.ToList());
         }
         // GET: 客戶聯絡人/Details/5

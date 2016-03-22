@@ -14,7 +14,7 @@ namespace MyExercise01.Controllers
         // GET: 客戶資料
         public ActionResult Index()
         {
-            return View(db.客戶資料.Where(w => w.是否已刪除 == false).ToList());
+            return View(db.客戶資料.Where(w => w.是否已刪除 == false).OrderBy(o=>o.Id).ToList());
         }
 
 
@@ -23,14 +23,8 @@ namespace MyExercise01.Controllers
         public ActionResult Index(string keyword)
         {
             var data = db.客戶資料.Where(w => w.是否已刪除 == false).AsQueryable();
-            if (string.IsNullOrEmpty(keyword))
-            {
-                return View(data.ToList());
-            }
-            else
-            {
-                return View(data.Where(w => w.客戶名稱.Contains(keyword)).ToList());
-            }
+            return View(data.Where(w => w.客戶名稱.Contains(keyword)).ToList());
+            
         }
 
         // GET: 客戶資料/Details/5

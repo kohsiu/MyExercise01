@@ -15,7 +15,8 @@ namespace MyExercise01.Controllers
         public ActionResult Index()
         {
             var 客戶銀行資訊 = db.客戶銀行資訊.Include(客 => 客.客戶資料)
-                                .Where(w => w.是否已刪除 == false);
+                                .Where(w => w.是否已刪除 == false)
+                                .OrderBy(o => o.客戶Id).AsQueryable();
             return View(客戶銀行資訊.ToList());
         }
 
@@ -24,7 +25,8 @@ namespace MyExercise01.Controllers
         {
             var 客戶銀行資訊 = db.客戶銀行資訊.Include(客 => 客.客戶資料)
                                 .Where(w => w.是否已刪除 == false &&
-                                        w.客戶資料.客戶名稱.Contains(keyword));
+                                        w.客戶資料.客戶名稱.Contains(keyword))
+                                .OrderBy(o => o.客戶Id).AsQueryable();
             return View(客戶銀行資訊.ToList());
         }
         // GET: 客戶銀行資訊/Details/5
