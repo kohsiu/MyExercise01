@@ -8,7 +8,7 @@
 
 <p>
     @Html.ActionLink("Create New", "Create")
-    @using (Html.BeginForm("index", "客戶聯絡人", new { Name = "searchName", CusName = "searchCusName" }))
+    @using (Html.BeginForm())
     {
         <table class="table">
             <tr>
@@ -25,10 +25,12 @@
                     @Html.TextBox("searchCusName")
                 </td>
                 <td>
-                    <button type="submit">查詢</button>
+                    <button type="submit" name="button" value="Search">查詢</button>
                 </td>
             </tr>
         </table>
+        
+        <button type="submit" name="button" value="Excel">Excel</button>
     }
 </p>
 <table class="table">
